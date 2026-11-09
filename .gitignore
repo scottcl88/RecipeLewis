@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.firebase/
+*.log
+.env
+.env.*
+!.env.example
+serviceAccount*.json
+export/
+recipelewis-export/
+coverage/
+screenshots/tmp/
