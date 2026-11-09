@@ -1,0 +1,17 @@
+@media print {
+  :root, [data-theme='dark'], [data-theme='light'] { --color-bg: #fff; --color-surface: #fff; --color-text: #000; --color-text-muted: #333; --color-border: #999; color-scheme: light; }
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .topbar, .tabbar, .footer, .no-print, .toasts, .offline, .skip-link, .chips-print-hide { display: none !important; }
+  .main { padding: 0; max-width: none; }
+  .reading { max-width: none; }
+  .hero { display: none; }
+  .recipe-cols { display: block; }
+  .ingredients-col { position: static; margin-bottom: 16pt; }
+  details.section { display: block; }
+  details.section > summary { font-weight: 700; }
+  .checklist li { border-bottom: 0; padding: 2pt 0; break-inside: avoid; }
+  .checklist input { appearance: none; border: 1.5px solid #000; width: 11pt; height: 11pt; margin-top: 3pt; }
+  .steps li { break-inside: avoid; }
+  a { color: #000; text-decoration: none; }
+  .meta-strip { border: 1px solid #999; }
+}
