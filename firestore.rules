@@ -1,0 +1,48 @@
+rules_version = '2';
+// RecipeLewis v2 Firestore rules. Claims (admin / member) are the gate; users/{uid}.role is display only.
+// Tested in rules-tests/ with the emulator. Reads require a member or admin claim (a signed-in user with
+// no claim is "awaiting approval" and can only see their own profile doc).
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function signedIn() { return request.auth != null; }
+    function isAdmin()  { return signedIn() && request.auth.token.get('admin', false) == true; }
+    function isMember() { return signedIn() && (request.auth.token.get('member', false) == true || isAdmin()); }
+    function validTitle(d) {
+      return d.title is string && d.title.size() > 0 && d.title.size() <= 200;
+    }
+    function validTags(d) { return d.tags is list && d.tags.size() <= 30; }
+
+    match /recipes/{id} {
+      allow read: if isMember();
+      allow create: if isMember() && validTitle(request.resource.data) && validTags(request.resource.data)
+        && request.resource.data.createdBy == request.auth.uid;
+      allow update: if isMember() && validTitle(request.resource.data) && validTags(request.resource.data)
+        && request.resource.data.createdBy == resource.data.createdBy;
+      allow delete: if isMember();
+    }
+    match /categories/{id} {
+      allow read: if isMember();
+      allow write: if isAdmin();
+    }
+    match /tags/{id} {
+      allow read: if isMember();
+      allow create, update: if isMember()
+        && request.resource.data.keys().hasOnly(['name'])
+        && request.resource.data.name is string && request.resource.data.name.size() <= 60;
+      allow delete: if isAdmin();
+    }
+    match /users/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+      // Profiles are created by the admin script / admin; clients cannot self-create or change role.
+      allow create: if isAdmin();
+      allow update: if isAdmin() || (signedIn() && request.auth.uid == uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['displayName','timeZone'])
+        && request.resource.data.displayName is string && request.resource.data.displayName.size() <= 80);
+      allow delete: if isAdmin();
+    }
+    match /invites/{email} {
+      allow read, write: if isAdmin();
+    }
+    match /{document=**} { allow read, write: if false; }
+  }
+}

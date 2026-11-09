@@ -10,3 +10,9 @@ export/
 recipelewis-export/
 coverage/
 screenshots/tmp/
+.emulator-data/
+firestore-debug.log
+ui-debug.log
+firebase-debug.log
+dist-emu/
+tsconfig.tsbuildinfo
