@@ -4,7 +4,7 @@ import tseslint from 'typescript-eslint';
 import reactHooks from 'eslint-plugin-react-hooks';
 
 export default tseslint.config(
-  { ignores: ['dist', '.firebase', 'node_modules', 'coverage', 'screenshots'] },
+  { ignores: ['dist', 'dist-emu', '.firebase', 'node_modules', 'coverage', 'screenshots'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -13,5 +13,5 @@ export default tseslint.config(
     plugins: { 'react-hooks': reactHooks },
     rules: { ...reactHooks.configs.recommended.rules },
   },
-  { files: ['scripts/**/*.mjs', '*.config.*', 'rules-tests/**'], languageOptions: { globals: globals.node } },
+  { files: ['scripts/**/*.mjs', '*.config.*', 'rules-tests/**'], languageOptions: { globals: { ...globals.node, ...globals.browser } } },
 );

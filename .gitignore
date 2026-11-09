@@ -14,3 +14,5 @@ screenshots/tmp/
 firestore-debug.log
 ui-debug.log
 firebase-debug.log
+dist-emu/
+tsconfig.tsbuildinfo

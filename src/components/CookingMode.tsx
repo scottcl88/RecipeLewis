@@ -39,7 +39,7 @@ export function CookingMode({ title, steps, ingredients, onClose }: Props) {
       </div>
       <div className="cook-body">
         {showIng && <ul className="checklist" style={{ marginBottom: 16 }}>{ingredients.map((g, n) => <li key={n}>{formatIngredient(g)}</li>)}</ul>}
-        {steps.length === 0 ? <p className="cook-step">No steps have been added to this recipe.</p> : (
+        {steps.length === 0 ? <p className="cook-step">This recipe has no typed steps. Exit to view its photo or card.</p> : (
           <>
             <p className="muted" aria-live="polite">Step {i + 1} of {steps.length}</p>
             <p className="cook-step">{steps[i]}</p>

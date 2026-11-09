@@ -9,11 +9,12 @@ export function ErrorBanner({ message, onRetry }: { message: string; onRetry?: (
     </div>
   );
 }
-export function EmptyState({ title, children }: { title: string; children?: ReactNode }) {
+export function EmptyState({ title, children, level = 2 }: { title: string; children?: ReactNode; level?: 1 | 2 }) {
+  const H = level === 1 ? 'h1' : 'h2';
   return (
     <div className="empty">
       <EmptyCardIcon />
-      <h2>{title}</h2>
+      <H>{title}</H>
       <div className="muted" style={{ marginBottom: 16 }}>{children}</div>
     </div>
   );

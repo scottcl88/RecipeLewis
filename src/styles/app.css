@@ -97,8 +97,8 @@ a.card:hover { border-color: var(--color-primary); color: var(--color-text); }
 /* recipe view */
 .recipe-title { font-family: var(--font-serif); }
 @media (min-width: 1024px) { .recipe-title { font-size: 3rem; } }
-.hero { border-radius: var(--radius-card); overflow: hidden; margin: var(--sp-4) 0; max-height: 420px; background: var(--color-border); }
-.hero img { width: 100%; max-height: 420px; object-fit: cover; }
+.hero { border-radius: var(--radius-card); overflow: hidden; margin: var(--sp-4) 0; background: var(--color-surface); border: 1px solid var(--color-border); }
+.hero img { width: 100%; max-height: 640px; object-fit: contain; }
 .meta-strip { display: flex; flex-wrap: wrap; gap: var(--sp-4) var(--sp-6); padding: var(--sp-4); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-card); margin: var(--sp-4) 0; }
 .meta-strip dt { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-text-muted); }
 .meta-strip dd { margin: 0; font-weight: 600; }
@@ -128,7 +128,9 @@ dialog::backdrop { background: rgb(0 0 0 / 0.5); }
 /* editor */
 .form-section { border: 1px solid var(--color-border); border-radius: var(--radius-card); padding: var(--sp-4); margin-bottom: var(--sp-4); background: var(--color-surface); }
 @media (min-width: 768px) { .form-section { padding: var(--sp-5); } }
-.form-section > legend, .form-section > h2 { font-size: var(--fs-lg); font-weight: 600; padding: 0 var(--sp-2); }
+.form-section > legend, .form-section > h2 { font-size: var(--fs-lg); font-weight: 600; padding: 0; margin: 0 0 var(--sp-3); }
+.form-section > legend { float: left; width: 100%; }
+.form-section > legend + * { clear: both; }
 .fieldset-reset { border: 0; padding: 0; margin: 0; min-width: 0; }
 .ing-row { display: grid; grid-template-columns: 80px 110px 1fr; gap: var(--sp-2); margin-bottom: var(--sp-2); align-items: start; }
 .ing-actions { grid-column: 1 / -1; display: flex; gap: var(--sp-1); justify-content: flex-end; }

@@ -22,7 +22,7 @@ export function Legal() {
 export function NotFound({ message }: { message?: string }) {
   return (
     <div className="reading">
-      <EmptyState title="Page not found">{message ?? 'We couldn’t find that page.'}</EmptyState>
+      <EmptyState level={1} title="Page not found">{message ?? 'We couldn’t find that page.'}</EmptyState>
       <p style={{ textAlign: 'center' }}><Link className="btn btn-primary" to="/recipes">Back to recipes</Link></p>
     </div>
   );
